@@ -1,0 +1,562 @@
+{
+	"info": {
+		"_postman_id": "45546459-a52275a8-256f-4939-ba58-b47c0e036e28",
+		"name": "reqres_Framework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"item": [
+				{
+					"name": "getList",
+					"id": "45546459-8c39b244-2e26-4e98-b19c-70e322f69842",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "eb65fe54-2b28-4867-a5de-568b234b67c2",
+								"exec": [
+									"getSingleResponse = JSON.parse (responseBody)\r",
+									"console.log(getSingleResponse)\r",
+									"userid = getSingleResponse.data.id\r",
+									"console.log (userid === 2)\r",
+									"useremail = getSingleResponse.data.email\r",
+									"console.log (useremail ===\"janet.weaver@reqres.in\")\r",
+									"userfirst_name = getSingleResponse.data.first_name\r",
+									"console.log (userfirst_name === \"Janet\")\r",
+									"userlast_name = getSingleResponse.data.last_name\r",
+									"console.log (userlast_name === \"Weaver\")\r",
+									"useravatar = getSingleResponse.data.avatar\r",
+									"console.log (useravatar === \"https://reqres.in/img/faces/2-image.jpg\")\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-c87c314a-1b47-4967-a089-2f8cebf7450b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_Unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0c09325-7fd3-4d66-b83e-121607fed1f7",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-6608d561-0556-477e-bbd7-7e22b70b5e7e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/23",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"23"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "45546459-cfb4d6f8-b5de-4379-b5e7-5505210d3c2e"
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "addUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ba1a7d3-45a3-46b8-a488-5913c2761c39",
+								"exec": [
+									"pm.test (\"Status Code is 200\", function () {\r",
+									"pm.response.to.have.status (200);\r",
+									"});\r",
+									"addUserResponse = JSON.parse(responseBody)\r",
+									"console.log (addUserResponse)\r",
+									"postid = addUserResponse.id\r",
+									"postname = addUserResponse.name\r",
+									"postyear = addUserResponse.data.year\r",
+									"postgetprice = addUserResponse.data.price\r",
+									"postCPUmodel = addUserResponse.data[\"CPU model\"]\r",
+									"postHarddisksize = addUserResponse.data[\"Hard disk size\"]\r",
+									"pm.environment.set(\"postid\", postid);\r",
+									"pm.environment.set(\"postname\", postname);\r",
+									"pm.environment.set(\"postyear\", postyear);\r",
+									"pm.environment.set(\"postprice\", postgetprice);\r",
+									"pm.environment.set(\"postCPUmodel\", postCPUmodel);\r",
+									"pm.environment.set(\"postHarddisksize\", postHarddisksize);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-e1ea7dd5-ce45-42f4-b0f7-795fb31f4ac9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/objects",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser_error_404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ba1a7d3-45a3-46b8-a488-5913c2761c39",
+								"exec": [
+									"pm.test (\"Status Code is 404\", function () {\r",
+									"pm.response.to.have.status (404);\r",
+									"});\r",
+									"responseUnauthorized = JSON.parse (responseBody)\r",
+									"returnCode = responseUnauthorized.status\r",
+									"errorText = responseUnauthorized.error\r",
+									"invalidPath = responseUnauthorized.path\r",
+									"console.log (returnCode === 404)\r",
+									"console.log (errorText === \"Not Found\")\r",
+									"console.log (invalidPath === \"/obj\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-b01ceeac-8e0a-4186-96da-3aa7c1134130",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/obj",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"obj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser_error_400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ba1a7d3-45a3-46b8-a488-5913c2761c39",
+								"exec": [
+									"//responseError =JSON.parse (responseBody)\r",
+									"console.log (JSON.parse (responseBody))\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-80c5d1e0-21fd-4ca8-852b-8ee303e6a08f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": \r\n   \r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/objects",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getaddedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2ebf1614-39c4-44d3-bc8e-69d3e42f8c93",
+								"exec": [
+									"//getUserResponse = JSON.parse (responseBody)\r",
+									"//console.log (getUserResponse)\r",
+									"//getid = getUserResponse.0.id\r",
+									"//getname = getUserResponse.name\r",
+									"//console.log (getid)\r",
+									"//getyear = getUserResponse.x[0].data.year\r",
+									"//getprice = getUserResponse.x[0].data.price\r",
+									"//getCPUModel = getUserResponse.x[0].data[\"CPU model\"]\r",
+									"//getHardDiskSize = getUserResponse.x[0].data[\"Hard disk size\"]\r",
+									"//pm.environment.set(\"getid\", getid);\r",
+									"//pm.environment.set(\"getname\", getname);\r",
+									"//pm.environment.set(\"getyear\", getyear);\r",
+									"//pm.environment.set(\"getprice\", getprice);\r",
+									"//pm.environment.set(\"getCPUModel\", getCPUModel);\r",
+									"//pm.environment.set(\"getHardDiskSize\", getHardDiskSize);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"id": "45546459-926a8db0-c6eb-489b-94e8-0947e53e97e6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.restful-api.dev/objects?id={{postid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{postid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postRegisterUserdataDriven",
+					"id": "45546459-5bd222bd-0976-4e76-829a-41f498a367ff",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postRegisterUserdataDriven_error_401",
+					"id": "45546459-aed597de-2dea-4d3d-b951-0c70e0b74dd6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "45546459-68297677-f30d-4eb1-89c5-0548bf242b5f"
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete_Error_204",
+					"id": "45546459-62ed4131-8b3c-4c6d-aa5b-7313ceaf686b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "45546459-2c7d4bf6-3139-47ad-a8ea-3dd5d87637c7"
+		},
+		{
+			"name": "Patch",
+			"item": [
+				{
+					"name": "Patch-user",
+					"id": "45546459-24903cd6-3580-4ebb-9b6b-b0ac05e3c470",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"id": "45546459-eadfaa1e-fe35-4e05-aa1a-ec21ad7c2bc7"
+		}
+	]
+}

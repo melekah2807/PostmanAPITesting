@@ -1,0 +1,497 @@
+{
+	"info": {
+		"_postman_id": "a52275a8-256f-4939-ba58-b47c0e036e28",
+		"name": "reqres_Framework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45546459",
+		"_collection_link": "https://hiteshmelekar-5402407.postman.co/workspace/Hitesh-Melekar's-Workspace~3485ffa7-8f57-4a06-8588-0606ae95d606/collection/45546459-a52275a8-256f-4939-ba58-b47c0e036e28?action=share&source=collection_link&creator=45546459"
+	},
+	"item": [
+		{
+			"name": "Get",
+			"item": [
+				{
+					"name": "getList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users?page=2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"getSingleResponse = JSON.parse (responseBody)\r",
+									"console.log(getSingleResponse)\r",
+									"userid = getSingleResponse.data.id\r",
+									"console.log (userid === 2)\r",
+									"useremail = getSingleResponse.data.email\r",
+									"console.log (useremail ===\"janet.weaver@reqres.in\")\r",
+									"userfirst_name = getSingleResponse.data.first_name\r",
+									"console.log (userfirst_name === \"Janet\")\r",
+									"userlast_name = getSingleResponse.data.last_name\r",
+									"console.log (userlast_name === \"Weaver\")\r",
+									"useravatar = getSingleResponse.data.avatar\r",
+									"console.log (useravatar === \"https://reqres.in/img/faces/2-image.jpg\")\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_Unauthorized",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/23",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"23"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "addUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"Status Code is 200\", function () {\r",
+									"pm.response.to.have.status (200);\r",
+									"});\r",
+									"addUserResponse = JSON.parse(responseBody)\r",
+									"console.log (addUserResponse)\r",
+									"postid = addUserResponse.id\r",
+									"postname = addUserResponse.name\r",
+									"postyear = addUserResponse.data.year\r",
+									"postgetprice = addUserResponse.data.price\r",
+									"postCPUmodel = addUserResponse.data[\"CPU model\"]\r",
+									"postHarddisksize = addUserResponse.data[\"Hard disk size\"]\r",
+									"pm.environment.set(\"postid\", postid);\r",
+									"pm.environment.set(\"postname\", postname);\r",
+									"pm.environment.set(\"postyear\", postyear);\r",
+									"pm.environment.set(\"postprice\", postgetprice);\r",
+									"pm.environment.set(\"postCPUmodel\", postCPUmodel);\r",
+									"pm.environment.set(\"postHarddisksize\", postHarddisksize);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/objects",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser_error_404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test (\"Status Code is 404\", function () {\r",
+									"pm.response.to.have.status (404);\r",
+									"});\r",
+									"responseUnauthorized = JSON.parse (responseBody)\r",
+									"returnCode = responseUnauthorized.status\r",
+									"errorText = responseUnauthorized.error\r",
+									"invalidPath = responseUnauthorized.path\r",
+									"console.log (returnCode === 404)\r",
+									"console.log (errorText === \"Not Found\")\r",
+									"console.log (invalidPath === \"/obj\")"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "reqres-free-v1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": {\r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/obj",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"obj"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUser_error_400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//responseError =JSON.parse (responseBody)\r",
+									"console.log (JSON.parse (responseBody))\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"name\": \"Apple MacBook Pro 16\",\r\n   \"data\": \r\n   \r\n      \"year\": 2019,\r\n      \"price\": 1849.99,\r\n      \"CPU model\": \"Intel Core i9\",\r\n      \"Hard disk size\": \"1 TB\"\r\n   }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.restful-api.dev/objects",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getaddedUser",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//getUserResponse = JSON.parse (responseBody)\r",
+									"//console.log (getUserResponse)\r",
+									"//getid = getUserResponse.0.id\r",
+									"//getname = getUserResponse.name\r",
+									"//console.log (getid)\r",
+									"//getyear = getUserResponse.x[0].data.year\r",
+									"//getprice = getUserResponse.x[0].data.price\r",
+									"//getCPUModel = getUserResponse.x[0].data[\"CPU model\"]\r",
+									"//getHardDiskSize = getUserResponse.x[0].data[\"Hard disk size\"]\r",
+									"//pm.environment.set(\"getid\", getid);\r",
+									"//pm.environment.set(\"getname\", getname);\r",
+									"//pm.environment.set(\"getyear\", getyear);\r",
+									"//pm.environment.set(\"getprice\", getprice);\r",
+									"//pm.environment.set(\"getCPUModel\", getCPUModel);\r",
+									"//pm.environment.set(\"getHardDiskSize\", getHardDiskSize);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.restful-api.dev/objects?id={{postid}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"restful-api",
+								"dev"
+							],
+							"path": [
+								"objects"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{postid}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postRegisterUserdataDriven",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "postRegisterUserdataDriven_error_401",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"pistol\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://reqres.in/api/register",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "Delete_Error_204",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "reqres-free-v1",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/2",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

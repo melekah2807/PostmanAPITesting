@@ -360,10 +360,18 @@
 									"//pm.environment.set(\"getyear\", getyear);\r",
 									"//pm.environment.set(\"getprice\", getprice);\r",
 									"//pm.environment.set(\"getCPUModel\", getCPUModel);\r",
-									"//pm.environment.set(\"getHardDiskSize\", getHardDiskSize);"
+									"//pm.environment.set(\"getHardDiskSize\", getHardDiskSize);\r",
+									"pm.environment.set(\"test_QA\", \"123\");"
 								],
 								"type": "text/javascript",
 								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
 							}
 						}
 					],
